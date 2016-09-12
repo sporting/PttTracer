@@ -22,6 +22,6 @@
  - `pttLoopQuery_big5` 透過 `ptt.sh` 自動將 `pttLoopQuery`(utf-8) 轉換成 big5 的格式
  - `analptt.sh` 將重複的動態去除，以便於分析
 
-4. 使用方法ss
- 將 `ptt.sh` 設上排程，每分鐘執行，`ptt.sh` 會判斷執行中則結束程序，不須擔心資源耗盡
- 檢視 `./expectptt/log/daily` 的結果即可
+4. 使用方法
+ - 將 `ptt.sh` 設上排程，每分鐘執行，`ptt.sh` 會判斷執行中則結束程序，不須擔心資源耗盡
+ - 檢視 `./expectptt/log/daily` 的結果即可
