@@ -1,0 +1,55 @@
+#!/usr/bin/expect
+
+set timeout 300
+set timesCount 1
+set maxCount 60
+
+log_file -noappend $env(LOG_FILE)
+spawn telnet ptt.cc
+expect "new"
+send "\b\b\b\b"
+send "$env(PTT_ID)\r"
+expect ":"
+send "$env(PTT_PWD)\r"
+
+expect {
+  "您想刪除其他重複登入的連線嗎？" {
+    sleep 1
+    send "n\r"
+    exp_continue
+  }
+  "連往本站。" {
+    sleep 1
+    send "\r"
+    exp_continue
+  }
+  "【 休閒聊天區 】" {
+    sleep 1
+    send "t\r"
+    exp_continue
+  }
+  "顯示上幾次熱訊" {
+    sleep 1
+    send "q\r" 
+    exp_continue
+  }
+  "請輸入使用者代號" {
+    sleep 1
+    send "$env(QUERY_ID)\r"
+    exp_continue
+  }
+  "象棋戰績" {
+    if { $timesCount > $maxCount } {
+      exit
+    } else {
+      set timesCount [expr {$timesCount + 1}]
+
+      sleep 10
+      send "\r"
+      exp_continue
+    }
+  }
+  eof {
+    exit
+  }
+}
